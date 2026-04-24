@@ -1,9 +1,9 @@
 services:
   # El motor de la base de datos
   db:
-    image: postgres:18 # Cambia a 18 cuando esté disponible oficialmente
+    image: postgres:17 # Versión estable actual
     container_name: postgres_cris
-    restart: always
+    restart: "no"
     environment:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: postgres
@@ -13,19 +13,6 @@ services:
       - "0.0.0.0:5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
-
-  # El administrador visual (pgAdmin)
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin_cris
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: cristiansrc@gmail.com
-      PGADMIN_DEFAULT_PASSWORD: 123456
-    ports:
-      - "9090:80"
-    depends_on:
-      - db
 
 volumes:
   postgres_data:
